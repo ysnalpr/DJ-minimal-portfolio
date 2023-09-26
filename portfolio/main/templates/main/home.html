@@ -6,7 +6,7 @@
     <div class="profile__data">
         <div class="profile__border">
             <div class="profile__perfil">
-                <img src="{% thumbnail about.image 400x640 %}" alt="{{ about.name }}">
+                <img src="{% thumbnail about.image 400x640 quality=100 %}" alt="{{ about.name }}">
             </div>
         </div>
         <h2 class="profile__name">{{ about.name }}</h2>
@@ -47,4 +47,59 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block projects %}
+    {% for project in projects %}
+        <article class="projects__card">
+            <img src="{% thumbnail project.image 400x640 quality=100 %}" alt="{{ project.title }}" class="projects__img">
+
+            <div class="projects__modal">
+                <div>
+                    <span class="projects__subtitle">{{ project.subtitle }}</span>
+                    <h3 class="projects__title">{{ project.title }}</h3>
+                    <a href="{{ project.link }}" class="projects__button button button__small">
+                        <i class="ri-link"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    
+    {% endfor %}
+{% endblock %}
+
+{% block skills %}
+    <div class="skills__area">
+        <div class="skills__box">
+            <div class="skills__group">
+                {% for skill in skills %}
+                    {% cycle 'odd' 'even' as state silent %}
+                    {% if state == 'odd' %}
+                        <div class="skills__data">
+                            <i class="ri-checkbox-circle-line"></i>
+                            <div>
+                                <h3 class="skills__name">{{ skill.title }}</h3>
+                                <span class="skills__level">{{ skill.level }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="skills__box">
+                <div class="skills__group">
+                    {% for skill in skills %}
+                        {% cycle 'odd' 'even' as state silent %}
+                        {% if state == 'even' %}
+                            <div class="skills__data">
+                                <i class="ri-checkbox-circle-line"></i>
+                                <div>
+                                    <h3 class="skills__name">{{ skill.title }}</h3>
+                                    <span class="skills__level">{{ skill.level }}</span>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
 {% endblock %}
