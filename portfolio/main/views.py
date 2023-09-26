@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from .models import About
 
-# Create your views here.
+
+def home(request):
+    about = About.objects.first()
+    print(about.socials.all())
+    return render(request, "main/home.html", {"about": about})

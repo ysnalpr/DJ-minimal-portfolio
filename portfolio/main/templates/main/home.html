@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block profile %} 
+<div class="profile__container grid">
+    <div class="profile__data">
+        <div class="profile__border">
+            <div class="profile__perfil">
+                <img src="{{ about.image.url }}" alt="{{ about.name }}">
+            </div>
+        </div>
+        <h2 class="profile__name">{{ about.name }}</h2>
+        <h3 class="profile__profession">{{ about.job_title }}</h3>
+
+        <ul class="profile__social">
+            {% for social in about.socials.all %}
+                <a href="{{ social.url }}" target="_blank" class="profile__social-link">
+                    {{ social.icon|safe }}
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="profile__info grid">
+        <div class="profile__info-group">
+            <h3 class="profile__info-number">{{ about.years_of_work }}</h3>
+            <p class="profile__info-description">
+                Years of <br> work
+            </p>
+        </div>
+        <div class="profile__info-group">
+            <h3 class="profile__info-number">+{{ about.completed_projects }}</h3>
+            <p class="profile__info-description">
+                Completed <br> projects
+            </p>
+        </div>
+    </div>
+    <div class="profile__buttons">
+        <a download="{{ about.resume_file }}" href="" class="button">
+            Download Resume <i class="ri-download-line"></i>
+        </a>
+        <div class="profile__buttons-small">
+            {% for contact in about.contacts.all %}
+                <a href="{{ contact.url }}" target="_blank" class="button button__small button__gray">
+                    {{ contact.icon|safe }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
